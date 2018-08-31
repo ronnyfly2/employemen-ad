@@ -3,9 +3,8 @@
 	el-row.list_source
 		el-col(:span="24")
 			h1 Formulario
-	el-row
-		el-col(:span="6")
-		el-col(:span="12")
+	el-row.ctn_form
+		el-col(:span="24")
 			el-form(:model="ruleForm" :rules="rules" ref="ruleForm" label-position='left' v-loading="loading")
 				el-row
 					el-col(:span="12")
@@ -46,7 +45,6 @@
 				el-col(:span="24")
 					el-form-item
 						el-button(type="primary" @click="saveUser") Guardar
-		el-col(:span="6")
 </template>
 <script>
 import { Employers } from '../../store/employers'
@@ -54,7 +52,7 @@ import { Employers } from '../../store/employers'
 export default {
 	name: 'EmployersForm',
 	mounted () {
-		if(this.idEmployer != 0) {
+		if(this.idEmployer != 0){
 			this.getEmployer()
 		}
 		document.addEventListener("keydown", (e) => {
@@ -140,7 +138,6 @@ export default {
 			}
 			self.loading = false;
 			self.tableData = arrayNew;
-			console.log('gender', arrayNew)
 		},
 		matchesResults(e){
 			return this.tableData.filter(usersName=>{
@@ -166,21 +163,17 @@ export default {
 			let monthBirth = "" + (dateBirth.getMonth() + 1); if (monthBirth.length == 1) { monthBirth = "0" + monthBirth; }
 			let dayBirth = "" + dateBirth.getDate(); if (dayBirth.length == 1) { dayBirth = "0" + dayBirth; }
 			self.ruleForm.birthdate = yearBirth + "-" + monthBirth + "-" + dayBirth;
-			console.log('dates fecha de nacimiento',self.ruleForm.birthdate)
-			self.ruleForm.registrationDate = year + "-" + month + "-" + day + " " + hour + ":" + minute;
-			Employers.push(self.ruleForm).then((res)=>{
-				this.$refs.ruleForm.resetFields();
-			})
-		},
-		handleDelete(idx, elem){
-			let self = this;
-			this.$confirm('estas seguro de eliminar?')
-				.then(_ => {
-					Employers.child(elem.itemId).remove();
+			if(this.idEmployer != 0){
+				self.ruleForm.updateRegister = year + "-" + month + "-" + day + " " + hour + ":" + minute;
+				Employers.child(this.idEmployer).update(self.ruleForm);
+				this.$router.push('/empleadores');
+			}else{
+				self.ruleForm.registrationDate = year + "-" + month + "-" + day + " " + hour + ":" + minute;
+				Employers.push(self.ruleForm).then((res)=>{
+					this.$refs.ruleForm.resetFields();
+					this.$router.push('/empleadores');
 				})
-				.catch(_ => {
-					console.log('error',_)
-				});
+			}
 		},
 		notifyFunc(){
 			let self = this;

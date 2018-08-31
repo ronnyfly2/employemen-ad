@@ -1,11 +1,10 @@
 <template lang="pug">
 	header
 		.box_center
-			//img.logo(src="../../assets/img/logo_delicores.png")
+			img.logo(src="../../assets/img/logo.png")
 
 </template>
 <script>
-require('./../../stylus/base/base.styl')
 export default {
 	props:['headerAdmin'],
 	data () {
@@ -21,7 +20,7 @@ export default {
 
 <style lang="stylus">
 header
-	height 102px
+	height 133px
 	width 100%
 	background #ffffff
 	position fixed
@@ -34,7 +33,6 @@ header
 .logo
 	width 25.554%
 	max-width 240px
-	margin-top 20px
 	min-width 150px
 nav
 	width 50%

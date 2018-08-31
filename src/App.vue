@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  name: 'App',
+	name: 'App',
 };
 </script>
 
@@ -18,5 +18,5 @@ export default {
 	height 100%
 	//-min-height calc(100vh - 140px)
 	position relative
-	padding-top 102px
+	padding-top 133px
 </style>

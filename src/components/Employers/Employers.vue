@@ -8,6 +8,10 @@
 				el-row
 					el-col.col_search(:span="6")
 						el-input(placeholder="Buscar" prefix-icon="el-icon-search" v-model="search.search" @input="searchFunction")
+					el-col.col_create(:span="18")
+						router-link(:to="{name: 'EmployersForm'}")
+							| Crear nuevo
+							i(class="el-icon-plus")
 		el-col(:span="24")
 			el-table(:data="search.search===''?tableData:TableSearch" border style="width: 100%" v-loading="loading")
 				el-table-column(prop="name" label="Nombre")
@@ -24,8 +28,7 @@
 				el-table-column(prop="message" label="Mensaje")
 				el-table-column(label="Operaciones")
 					template(slot-scope="scope")
-						el-button(size="mini")
-							router-link(:to="{name: 'EmployersForm', params: {'id': scope.row.itemId}}") Editar
+						el-button(size="mini" @click="handleEdit(scope.$index,scope.row.itemId)") Editar
 						el-button(size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)") Eliminar
 		el-col(:span="6")
 </template>
@@ -83,7 +86,6 @@ export default {
 			}
 			self.loading = false;
 			self.tableData = arrayNew;
-			console.log('gender', arrayNew)
 		},
 		matchesResults(e){
 			return this.tableData.filter(usersName=>{
@@ -94,6 +96,9 @@ export default {
 		searchFunction(e){
 			const validateResult = this.matchesResults(e);
 			this.TableSearch = validateResult;
+		},
+		handleEdit(idx, elem){
+			this.$router.push({name: 'EmployersForm', params: {'id': elem}});
 		},
 		handleDelete(idx, elem){
 			let self = this;
@@ -148,4 +153,11 @@ h1
 .el-col.col_search
 .el-form-item.search_items
 	margin-bottom 0
+.col_create.el-col.el-col-18
+	text-align right
+	a
+		color #409eff
+		line-height 2.5
+		&:hover
+			text-decoration underline
 </style>
