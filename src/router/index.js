@@ -40,6 +40,24 @@ export default new Router({
 				containerBlock: loadView('Employers','EmployersForm'),
 				footer: Footer
 			}
+		},
+		{
+			path: '/empleados',
+			name: 'Employees',
+			components: {
+				default: headerAdmin,
+				containerBlock: loadView('Employees','Employees'),
+				footer: Footer
+			}
+		},
+		{
+			path: '/empleado/:id?',
+			name: 'EmployeesForm',
+			components: {
+				default: headerAdmin,
+				containerBlock: loadView('Employees','EmployeesForm'),
+				footer: Footer
+			}
 		}
 	],
 });
