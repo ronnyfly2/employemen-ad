@@ -66,6 +66,7 @@ export default {
 			let arrayNew = [];
 			//self.tableData = Object.values(userData);
 			for (var i in userData) {
+				// eslint-disable-next-line no-prototype-builtins
 				if (userData.hasOwnProperty(i)) {
 					arrayNew.push({
 						name:userData[i].name,
@@ -102,8 +103,8 @@ export default {
 		},
 		handleDelete(idx, elem){
 			let self = this;
-			this.$confirm('estas seguro de eliminar?')
-				.then(_ => {
+			self.$confirm('estas seguro de eliminar?')
+				.then(()=> {
 					Employers.child(elem.itemId).remove();
 				})
 				.catch(_ => {
@@ -141,8 +142,6 @@ export default {
 }
 </script>
 <style lang="stylus">
-h1
-	width 100%
 .list_source
 	margin-top 0
 	margin-bottom 40px

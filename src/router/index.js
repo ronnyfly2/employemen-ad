@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 import IndexHome from '@/views/IndexHome'
 
 import headerAdmin from '@/components/layouts/headerAdmin'
+import navBar from '@/components/layouts/navBar'
 import Footer from '@/components/layouts/Footer'
 
 
@@ -20,6 +21,7 @@ const routes = [
 			name: 'IndexHome',
 			components:{
 				default: headerAdmin,
+				navBarBlock: navBar,
 				containerBlock: IndexHome,
 				footer: Footer
 			}

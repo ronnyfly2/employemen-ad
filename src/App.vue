@@ -1,8 +1,12 @@
 <template lang="pug">
-#app.container
+#wrapper
 	router-view
-	router-view(name="containerBlock")
-	router-view(name="footer")
+	#content-wrapper.d-flex.flex-column
+		#content
+			router-view(name="navBarBlock")
+			.container-fluid
+				router-view(name="containerBlock")
+		router-view(name="footer")
 </template>
 
 <script>
@@ -12,11 +16,4 @@ export default {
 </script>
 
 <style lang="stylus">
-#app
-	text-align center
-	width 100%
-	height 100%
-	//-min-height calc(100vh - 140px)
-	position relative
-	padding-top 133px
 </style>

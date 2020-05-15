@@ -36,7 +36,7 @@
 import { Employees } from '../../store/employers'
 
 export default {
-    name: 'Employees',
+  name: 'Employees',
 	mounted () {
 		this.getListUsers();
 		document.addEventListener("keydown", (e) => {
@@ -66,6 +66,7 @@ export default {
 			let arrayNew = [];
 			//self.tableData = Object.values(userData);
 			for (var i in userData) {
+				// eslint-disable-next-line no-prototype-builtins
 				if (userData.hasOwnProperty(i)) {
 					arrayNew.push({
 						name:userData[i].name,
@@ -101,9 +102,8 @@ export default {
 			this.$router.push({name: 'EmployeesForm', params: {'id': elem}});
 		},
 		handleDelete(idx, elem){
-			let self = this;
 			this.$confirm('estas seguro de eliminar?')
-				.then(_ => {
+				.then(() => {
 					Employees.child(elem.itemId).remove();
 				})
 				.catch(_ => {
@@ -141,8 +141,6 @@ export default {
 }
 </script>
 <style lang="stylus">
-h1
-	width 100%
 .list_source
 	margin-top 0
 	margin-bottom 40px

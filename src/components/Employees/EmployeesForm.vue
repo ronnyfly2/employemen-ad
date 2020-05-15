@@ -109,8 +109,8 @@ export default {
 			let self = this;
 			Employees.child(this.idEmployee).once('value')
 			.then( snapshot => {
-				this.ruleForm = snapshot.val();
-				this.loading= false;
+				self.ruleForm = snapshot.val();
+				self.loading= false;
 			});
 		},
 		getFireUsers(userData){
@@ -118,6 +118,7 @@ export default {
 			let arrayNew = [];
 			//self.tableData = Object.values(userData);
 			for (var i in userData) {
+				// eslint-disable-next-line no-prototype-builtins
 				if (userData.hasOwnProperty(i)) {
 					arrayNew.push({
 						name:userData[i].name,
@@ -163,15 +164,16 @@ export default {
 			let monthBirth = "" + (dateBirth.getMonth() + 1); if (monthBirth.length == 1) { monthBirth = "0" + monthBirth; }
 			let dayBirth = "" + dateBirth.getDate(); if (dayBirth.length == 1) { dayBirth = "0" + dayBirth; }
 			self.ruleForm.birthdate = yearBirth + "-" + monthBirth + "-" + dayBirth;
-			if(this.idEmployee != 0){
+			if(self.idEmployee != 0){
 				self.ruleForm.updateRegister = year + "-" + month + "-" + day + " " + hour + ":" + minute;
-				Employees.child(this.idEmployee).update(self.ruleForm);
-				this.$router.push('/empleados');
+				Employees.child(self.idEmployee).update(self.ruleForm);
+				self.$router.push('/empleados');
 			}else{
 				self.ruleForm.registrationDate = year + "-" + month + "-" + day + " " + hour + ":" + minute;
 				Employees.push(self.ruleForm).then((res)=>{
-					this.$refs.ruleForm.resetFields();
-					this.$router.push('/empleados');
+					console.log(res)
+					self.$refs.ruleForm.resetFields();
+					self.$router.push('/empleados');
 				})
 			}
 		},
@@ -206,8 +208,6 @@ export default {
 }
 </script>
 <style lang="stylus">
-h1
-	width 100%
 .list_source
 	margin-top 0
 	margin-bottom 40px
