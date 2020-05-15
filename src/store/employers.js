@@ -16,10 +16,10 @@ let dbStore = appSet.firestore();
 // create a database references
 const Employers = db.ref('employer/');
 const Employees = db.ref('employee/');
-//-const EmployersStore = dbStore.collection('employer');
+const EmployersStore = dbStore.collection('employer');
 //-const pagesRef = db.ref('pages');
 //-const postsRef = db.ref('posts');
 //-const usersRef = db.ref('users');
 //-const mediaRef = db.ref('media');
 
-export { Employers, Employees,EmployersStore};
+export { Employers, Employees, EmployersStore};

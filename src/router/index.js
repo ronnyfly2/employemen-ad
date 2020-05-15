@@ -1,19 +1,20 @@
-import Vue from 'vue';
-import Router from 'vue-router';
-import IndexHome from '@/components/IndexHome';
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+
+import IndexHome from '@/views/IndexHome'
 
 import headerAdmin from '@/components/layouts/headerAdmin'
 import Footer from '@/components/layouts/Footer'
-Vue.use(Router);
-//const About = () => import("./views/About.vue");
+
+
+Vue.use(VueRouter)
+
 let loadView=(path,view)=>{
 	//return () => import(/* webpackChunkName: "view-[request]" */`@/components/Employers/${view}.vue`)
 	return () => import(`@/components/${path}/${view}.vue`)
 }
 
-export default new Router({
-	mode: 'history',
-	routes: [
+const routes = [
 		{
 			path: '/',
 			name: 'IndexHome',
@@ -59,5 +60,12 @@ export default new Router({
 				footer: Footer
 			}
 		}
-	],
-});
+]
+
+const router = new VueRouter({
+  mode: 'history',
+  base: process.env.BASE_URL,
+  routes
+})
+
+export default router
